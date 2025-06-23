@@ -1,11 +1,11 @@
 # What We're Building: A Full-Featured Online Course Platform
 
-# 3Courses Module
+# Courses Module
 
 - Each course comes with:
-        -  Title: Clear, searchable course name
-        - Description: Brief overview of what the - - course covers
-        - Thumbnail/Image: Visual identity for each course
+        Title: Clear, searchable course name
+        Description: Brief overview of what the - - course covers
+        Thumbnail/Image: Visual identity for each course
 
 - Access Levels:
         - Open Access – No login needed
