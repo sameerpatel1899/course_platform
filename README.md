@@ -1,6 +1,6 @@
 # What We're Building: A Full-Featured Online Course Platform
 
-# 3Courses Module
+# Courses Module
 
 - Each course comes with:
         -  Title: Clear, searchable course name
