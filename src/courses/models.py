@@ -99,7 +99,8 @@ def get_display_name(instance, *args, **kwargs):
 class Course(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True, null=True)
-    public_id = models.CharField(max_length=130, blank=True, null=True)
+    public_id = models.CharField(max_length=130, blank=True, null=True,
+    db_index=True)
     # image= models.ImageField(upload_to=handle_upload, blank=True, null=True)
     image = CloudinaryField(
         "image", 
@@ -147,7 +148,8 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True, null=True)
-    public_id = models.CharField(max_length=130, blank=True, null=True)
+    public_id = models.CharField(max_length=130, blank=True, null=True,
+    db_index=True)
     thumbnail = CloudinaryField("image", 
                 public_id_prefix=get_public_id_prefix,
                 display_name=get_display_name,
@@ -177,6 +179,8 @@ class Lesson(models.Model):
             self.public_id = generate_public_id(self)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return self.path
 
     @property
     def path(self):
@@ -186,4 +190,8 @@ class Lesson(models.Model):
         return f"{course_path}/lessons/{self.public_id}"
 
     def get_display_name(self):
-        return f"{self.title} - {self.course.get_display_name}"
+        return f"{self.title} - {self.course.get_display_name()}"
+    
+    @property
+    def is_coming_soon(self):
+        return self.status == PublishStatus.COMING_SOON
